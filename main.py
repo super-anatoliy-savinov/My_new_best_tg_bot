@@ -2,6 +2,8 @@ import os
 import random
 import time
 from aiogram import Bot, Dispatcher, F, types
+from aiogram.client.session.aiohttp import AiohttpSession
+from aiogram.client.telegram import TelegramAPIServer
 from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from supabase import create_client, Client
@@ -16,7 +18,9 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 if not all([TOKEN, UZS_PROVIDER_TOKEN, SUPABASE_URL, SUPABASE_KEY]):
     raise ValueError("КРИТИЧЕСКАЯ ОШИБКА: Забыли указать переменные окружения на хостинге!")
 
-bot = Bot(token=TOKEN)
+# Используем проверенный публичный прокси-зеркало для обхода блокировки файрвола
+session = AiohttpSession(api=TelegramAPIServer.from_baseurl("https://chatlabs.space"))
+bot = Bot(token=TOKEN, session=session)
 dp = Dispatcher()
 
 # Инициализируем клиент облачной базы данных
