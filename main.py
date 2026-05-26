@@ -19,7 +19,7 @@ if not all([TOKEN, UZS_PROVIDER_TOKEN, SUPABASE_URL, SUPABASE_KEY]):
     raise ValueError("КРИТИЧЕСКАЯ ОШИБКА: Забыли указать переменные окружения на хостинге!")
 
 # Используем проверенный публичный прокси-зеркало для обхода блокировки файрвола
-session = AiohttpSession(api=TelegramAPIServer.from_baseurl("https://chatlabs.space"))
+session = AiohttpSession(api=TelegramAPIServer.from_baseurl("https://dry-union-2b06.anatolijsavinov004.workers.dev/"))
 bot = Bot(token=TOKEN, session=session)
 dp = Dispatcher()
 
